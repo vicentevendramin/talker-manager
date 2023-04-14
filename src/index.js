@@ -1,4 +1,5 @@
 const express = require('express');
+const { getData } = require('./utils/data');
 
 const app = express();
 app.use(express.json());
@@ -13,4 +14,13 @@ app.get('/', (_request, response) => {
 
 app.listen(PORT, () => {
   console.log('Online');
+});
+
+app.get('/talker', async (_req, res) => {
+  const result = await getData();
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(200).json([]);
+  }
 });
