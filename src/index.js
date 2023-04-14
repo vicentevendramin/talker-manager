@@ -1,5 +1,5 @@
 const express = require('express');
-const { getData } = require('./utils/data');
+const { talkerRouter } = require('./routes/talkerRoutes');
 
 const app = express();
 app.use(express.json());
@@ -16,11 +16,4 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
-app.get('/talker', async (_req, res) => {
-  const result = await getData();
-  if (result) {
-    res.status(200).json(result);
-  } else {
-    res.status(200).json([]);
-  }
-});
+app.use('/talker', talkerRouter);
