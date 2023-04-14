@@ -1,4 +1,5 @@
-const fs = require('fs').promises;
+const fs = require('fs/promises');
+const crypto = require('crypto');
 
 const talkerData = 'src/talker.json';
 
@@ -8,6 +9,9 @@ const readTalkers = async () => {
   return result;
 };
 
+const generateToken = () => crypto.randomBytes(8).toString('hex');
+
 module.exports = {
   readTalkers,
+  generateToken,
 };
