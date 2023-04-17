@@ -61,6 +61,33 @@ talkerRouter.post(
 },
 );
 
+talkerRouter.put(
+  '/:id',
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+  validateDecimalRate,
+  async (req, res) => {
+  const { name, age, talk: { watchedAt, rate } } = req.body;
+  const { id } = req.params;
+  const talkers = await readTalkers();
+  const findTalker = talkers.find((talker) => talker.id === Number(id));
+
+  if (findTalker) {
+    const talkerIndex = talkers
+    .findIndex((talker) => talker.id === Number(id));
+    talkers[talkerIndex] = { ...talkers[talkerIndex], name, age, talk: { watchedAt, rate } };
+    await writeTalkers(talkers);
+    res.status(200).json(talkers[talkerIndex]);
+  } else {
+    res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  }
+},
+);
+
 module.exports = {
   talkerRouter,
 };
