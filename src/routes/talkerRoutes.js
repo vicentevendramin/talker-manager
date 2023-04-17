@@ -21,6 +21,19 @@ talkerRouter.get('/', async (_req, res) => {
   }
 });
 
+talkerRouter.get(
+  '/search',
+  validateToken,
+  async (req, res) => {
+  const { q } = req.query;
+  let talkers = await readTalkers();
+
+  if (q !== undefined) talkers = talkers.filter((talker) => talker.name.includes(q));
+
+  return res.status(200).json(talkers);
+},
+);
+
 talkerRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
   const talkers = await readTalkers();
