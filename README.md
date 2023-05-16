@@ -8,12 +8,9 @@ Neste projeto foi desenvolvido uma API. Utilizado a metodologia CRUD (Create, Re
 - NodeJS
 - Express
 - MySQL
-- Jest
 - Docker
 
 ---
-
-A aplicação foi desenvolvida com TDD `Test Driven Development`. Por conta disso, utilizei `Chai`, `Mocha` e `Sinon`, juntamente com o `Jest`, para realizar os testes unitários.
 
 # 🐋 Rodando no Docker
 
